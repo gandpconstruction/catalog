@@ -1,13 +1,13 @@
-import Image from "next/image";
-
 export default function Home() {
+
   return (
-    <></>
+    <div>
+      Home
+    </div>
   );
 }
 
 /*
-
 
 catalog.gandpconstruction.com
 - overall view of available catalogs
@@ -23,7 +23,5 @@ features
 - filtering, searching, etc.
 - ability to upload new catalogs in-app
 - ability to upload new catalogs via API
-
-
 
 */
