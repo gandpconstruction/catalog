@@ -1,0 +1,12 @@
+Catalog
+{
+  "id": "d3dd8b5c-1c35-47d9-a9ca-c57cb5b00e37",
+  "name": "name"
+}
+
+CatalogItem
+{
+  "catalogId": "d3dd8b5c-1c35-47d9-a9ca-c57cb5b00e37",
+  "id": "f17e1578-b10e-4c81-a90d-05284b569acd"
+  "columnName": "columnContent"
+}
