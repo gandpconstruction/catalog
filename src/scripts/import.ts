@@ -28,7 +28,6 @@ function optionsFromArgs() {
     return { catalogId, csv };
 }
 
-
 async function publishToCosmos(catalogId : string, item: object) {
     const container = Cosmos.database('Catalogs').container('CatalogItems');
     try {
@@ -72,8 +71,8 @@ async function main({ catalogId, csv }: { catalogId: string; csv: string }) {
             return value.replace(/^\$/, '').trim();
         },
         step: async function(results, parser) {
-            if (results.data) {
-                promises.push(limit(() => publishToCosmos(catalogId, results.data)));
+            if (typeof results.data === 'object') {
+                promises.push(limit(() => publishToCosmos(catalogId, results.data as object)));
             }
         },
         complete: async function(results, file) {
