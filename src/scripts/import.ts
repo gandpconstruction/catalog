@@ -9,11 +9,25 @@
 
 import '../config/environment'
 import Cosmos from '@/lib/cosmos';
-import { Command } from 'commander';
 import { parse } from 'papaparse';
-import pLimit from 'p-limit'
 
-const limit = pLimit(20); // 10 concurrent requests
+// Limit the number of concurrent requests to Cosmos DB
+import pLimit from 'p-limit'
+const limit = pLimit(20);
+
+// Command line arguments
+import { Command } from 'commander';
+function optionsFromArgs() {
+    const program = new Command();
+    program
+        .argument('<catalogId>')
+        .argument('<csv>');
+    program.parse(process.argv);
+    const [catalogId, csv] = program.processedArgs;
+
+    return { catalogId, csv };
+}
+
 
 async function publishToCosmos(catalogId : string, item: object) {
     const container = Cosmos.database('Catalogs').container('CatalogItems');
@@ -76,16 +90,6 @@ async function main({ catalogId, csv }: { catalogId: string; csv: string }) {
     );
 }
 
-function optionsFromArgs() {
-    const program = new Command();
-    program
-        .argument('<catalogId>')
-        .argument('<csv>');
-    program.parse(process.argv);
-    const [catalogId, csv] = program.processedArgs;
-
-    return { catalogId, csv };
-}
 
 
 main(optionsFromArgs()).catch((error) => {
